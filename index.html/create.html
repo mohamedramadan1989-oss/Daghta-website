@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daghta - ابدأ إنشاء متجرك الآن</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { font-family: 'Cairo', sans-serif; box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s ease; }
+        body { background-color: #070a12; color: #0f172a; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 40px 20px; }
+
+        .create-card { 
+            background: #f1f5f9; 
+            border: 1px solid #cbd5e1; 
+            padding: 40px; 
+            border-radius: 24px; 
+            width: 100%; 
+            max-width: 580px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
+            text-align: right; 
+        }
+        
+        .logo-box { text-align: center; margin-bottom: 20px; }
+        .logo-box img { height: 48px; object-fit: contain; }
+
+        .title { font-size: 24px; font-weight: 900; margin-bottom: 6px; color: #0f172a; text-align: center; }
+        .subtitle { font-size: 14px; color: #475569; margin-bottom: 25px; text-align: center; }
+
+        .section-label { font-size: 15px; font-weight: 900; color: #2563eb; margin: 25px 0 12px; border-bottom: 2px solid #cbd5e1; padding-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 6px; }
+        
+        .form-group input, .form-group select, .form-group textarea { 
+            width: 100%; 
+            padding: 12px 14px; 
+            border: 1.5px solid #cbd5e1; 
+            border-radius: 12px; 
+            font-size: 14px; 
+            outline: none; 
+            background: #ffffff; 
+            color: #0f172a; 
+            font-weight: 600;
+        }
+        .form-group textarea { resize: vertical; height: 75px; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+            border-color: #2563eb; 
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            background: #ffffff;
+            border: 1.5px dashed #94a3b8;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .file-input-wrapper:hover { border-color: #2563eb; background: #f8fafc; }
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .file-input-label { font-size: 13px; font-weight: 800; color: #475569; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+        .btn-submit { 
+            width: 100%; 
+            padding: 15px; 
+            background: linear-gradient(135deg, #2563eb, #1d4ed8); 
+            color: #fff; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: 900; 
+            cursor: pointer; 
+            margin-top: 15px; 
+            box-shadow: 0 4px 15px rgba(37,99,235,0.3); 
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.5); }
+
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #64748b; text-decoration: none; font-size: 13px; font-weight: 800; }
+        .back-link:hover { color: #2563eb; }
+    </style>
+</head>
+<body>
+
+    <div class="create-card">
+        <div class="logo-box">
+            <a href="index.html">
+                <img src="logo.png" alt="Daghta Logo">
+            </a>
+        </div>
+        <div class="title">أنشئ متجرك الفوري 🚀</div>
+        <div class="subtitle">خطوة واحدة وتكون تجارتك أونلاين بالكامل (مع فترة تجريبية 3 شهور مجاناً ✨)</div>
+
+        <form id="createStoreForm" onsubmit="saveStore(event)">
+            
+            <div class="section-label"><i class="fa-solid fa-store"></i> البيانات الأساسية</div>
+            
+            <div class="form-group">
+                <label>اسم المتجر / البراند *</label>
+                <input type="text" id="storeName" placeholder="مثال: طرحة استور" required>
+            </div>
+
+            <div class="form-group">
+                <label>الجملة التحفيزية / وصف المتجر</label>
+                <textarea id="storeSlogan" placeholder="مثال: نأخذك إلى عالم من الأناقة والجودة العالية! ✨"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>العملة المفضلة</label>
+                <select id="storeCurrency">
+                    <option value="ج.م">جنيه مصري (ج.م)</option>
+                    <option value="ر.س">ريال سعودي (ر.س)</option>
+                    <option value="د.إ">درهم إماراتي (د.إ)</option>
+                    <option value="$">دولار أمريكي ($)</option>
+                </select>
+            </div>
+
+            <div class="section-label"><i class="fa-solid fa-image"></i> صور البراند الغلاف واللوجو</div>
+
+            <div class="form-group">
+                <label>رفع شعار / لوجو المتجر</label>
+                <div class="file-input-wrapper">
+                    <span class="file-input-label" id="logoFileText"><i class="fa-solid fa-cloud-arrow-up"></i> اختر صورة اللوجو</span>
+                    <input type="file" id="storeLogoFile" accept="image/*" onchange="updateFileName(this, 'logoFileText')">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>رفع صورة غلاف المتجر Cover</label>
+                <div class="file-input-wrapper">
+                    <span class="file-input-label" id="coverFileText"><i class="fa-solid fa-image"></i> اختر صورة الغلاف</span>
+                    <input type="file" id="storeCoverFile" accept="image/*" onchange="updateFileName(this, 'coverFileText')">
+                </div>
+            </div>
+
+            <div class="section-label"><i class="fa-solid fa-share-nodes"></i> حسابات التواصل الاجتماعي</div>
+
+            <div class="form-group">
+                <label>رقم الواتساب لاستقبال الطلبات</label>
+                <input type="tel" id="storeWhatsapp" placeholder="مثال: 01012345678">
+            </div>
+
+            <div class="form-group">
+                <label>رابط صفحة الفيسبوك (اختياري)</label>
+                <input type="url" id="storeFacebook" placeholder="https://facebook.com/yourbrand">
+            </div>
+
+            <div class="form-group">
+                <label>رابط حساب إنستجرام (اختياري)</label>
+                <input type="url" id="storeInstagram" placeholder="https://instagram.com/yourbrand">
+            </div>
+
+            <div class="form-group">
+                <label>رابط حساب تيك توك TikTok (اختياري)</label>
+                <input type="url" id="storeTiktok" placeholder="https://tiktok.com/@yourbrand">
+            </div>
+
+            <button type="submit" class="btn-submit">حفظ وإنشاء المتجر والدخول للوحة التحكم 🚀</button>
+        </form>
+
+        <a href="index.html" class="back-link">← العودة للرئيسية</a>
+    </div>
+
+<script>
+    function updateFileName(input, labelId) {
+        if (input.files && input.files[0]) {
+            document.getElementById(labelId).innerHTML = `<i class="fa-solid fa-check" style="color:#16a34a"></i> تم اختيار: ${input.files[0].name}`;
+        }
+    }
+
+    function fileToBase64(file) {
+        return new Promise((resolve) => {
+            if (!file) { resolve(null); return; }
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => resolve(null);
+        });
+    }
+
+    async function saveStore(event) {
+        event.preventDefault();
+        
+        const brandName = document.getElementById('storeName').value.trim();
+        const slogan = document.getElementById('storeSlogan').value.trim();
+        const currency = document.getElementById('storeCurrency').value;
+        
+        const whatsapp = document.getElementById('storeWhatsapp').value.trim();
+        const facebook = document.getElementById('storeFacebook').value.trim();
+        const instagram = document.getElementById('storeInstagram').value.trim();
+        const tiktok = document.getElementById('storeTiktok').value.trim();
+
+        const logoFileInput = document.getElementById('storeLogoFile');
+        const coverFileInput = document.getElementById('storeCoverFile');
+
+        const logoBase64 = logoFileInput.files[0] ? await fileToBase64(logoFileInput.files[0]) : null;
+        const coverBase64 = coverFileInput.files[0] ? await fileToBase64(coverFileInput.files[0]) : null;
+
+        // حفظ البيانات الجديدة فورا وإلغاء أي تعارض قديم
+        localStorage.setItem('daghta_merchant_brand', brandName);
+        localStorage.setItem('daghta_merchant_slogan', slogan);
+        localStorage.setItem('daghta_merchant_currency', currency);
+        
+        localStorage.setItem('daghta_merchant_whatsapp', whatsapp);
+        localStorage.setItem('daghta_merchant_facebook', facebook);
+        localStorage.setItem('daghta_merchant_instagram', instagram);
+        localStorage.setItem('daghta_merchant_tiktok', tiktok);
+
+        // تحديث الصور بشكل مباشر
+        if (logoBase64) {
+            localStorage.setItem('daghta_merchant_logo', logoBase64);
+        }
+        if (coverBase64) {
+            localStorage.setItem('daghta_merchant_cover', coverBase64);
+        }
+
+        // ضبط فترة التجربة 3 شهور أوتوماتيكياً
+        if (!localStorage.getItem('daghta_trial_expire')) {
+            const expire = new Date();
+            expire.setDate(expire.getDate() + 90);
+            localStorage.setItem('daghta_trial_expire', expire.toISOString());
+        }
+
+        localStorage.setItem('daghta_logged_in', 'true');
+        window.location.href = 'dashboard.html';
+    }
+</script>
+
+</body>
+</html>
